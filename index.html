@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register Exercise</title>
+    <!--<link rel='stylesheet' href='style2.css'>-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  </head>
+  <style type="text/css">
+    th, td, button {
+        padding: 10px;
+    }
+
+  </style>
+  <body>
+    <div id="containter">
+      <div id="interface" style="width: 400px; height: 200px">
+
+        <table>
+          <tr>
+            <td style="width:80%; border: 1px solid black;"><div id="displayField">0</div></td>
+            <td style="width:20%; float:right;"><button id="buttonExecute">Execute</button></td>
+          </tr>
+        </table>
+
+
+        <table>
+          <tr>
+            <td style="width:20%"><button id="button7">7</button></td>
+            <td style="width:20%"><button id="button8">8</button></td>
+            <td style="width:20%"><button id="button9">9</button></td>
+            <td style="width:20%"><button id="buttonDivide">/</button></td>
+            <td style="width:20%; float:right;"><button id="buttonClear">Clear</button></td>
+          </tr>
+          <tr>
+            <td style="width:20%"><button id="button4">4</button></td>
+            <td style="width:20%"><button id="button5">5</button></td>
+            <td style="width:20%"><button id="button6">6</button></td>
+            <td style="width:20%"><button id="buttonMultiply">*</button></td>
+            <td style="width:20%; float:right;"><button id="buttonBalance">Balance</button></td>
+          </tr>
+          <tr>
+            <td style="width:20%"><button id="button1">1</button></td>
+            <td style="width:20%"><button id="button2">2</button></td>
+            <td style="width:20%"><button id="button3">3</button></td>
+            <td style="width:20%"><button id="buttonSubtract">-</button></td>
+            <td style="width:20%; float:right;"><button id="buttonDeposit">Deposit</button></td>
+          </tr>
+          <tr>
+            <td style="width:20%"><button id="button0">0</button></td>
+            <td style="width:20%"><button id="button00">00</button></td>
+            <td style="width:20%"><button id="buttonPoint">.</button></td>
+            <td style="width:20%"><button id="buttonAdd">+</button></td>
+            <td style="width:20%; float:right;"><button id="buttonWithdraw">Withdraw</button></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+    <script src="calculator.js" type="text/javascript"></script>
+    <script src="cash_register.js" type="text/javascript"></script>
+
+    <script>
+
+      var resetOnNextInput = true;
+
+      var buttonDisplayInput = function(newValue) {
+
+        var oldValue = document.getElementById('displayField').innerHTML;
+
+        if(resetOnNextInput) {
+
+          document.getElementById('displayField').innerHTML = newValue;
+          resetOnNextInput = false;
+
+        } else {
+
+          document.getElementById('displayField').innerHTML = oldValue + newValue;
+        }
+      };
+
+      document.getElementById('buttonExecute').addEventListener('click', function(){
+
+      });
+      document.getElementById('button7').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button8').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button9').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonDivide').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonClear').addEventListener('click', function(){
+
+      });
+      document.getElementById('button4').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button5').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button6').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonMultiply').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonBalance').addEventListener('click', function(){
+
+      });
+      document.getElementById('button1').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button2').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button3').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonSubtract').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonDeposit').addEventListener('click', function(){
+
+      });
+      document.getElementById('button0').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('button00').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonPoint').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonAdd').addEventListener('click', function(){
+
+        buttonDisplayInput(this.innerHTML);
+
+      });
+      document.getElementById('buttonWithdraw').addEventListener('click', function(){
+
+      });
+      /*document.getElementById('button').addEventListener('click', function() {
+        var input1 = document.getElementById('operand1').value;
+        var input2 = document.getElementById('operand2').value;
+
+        var selects = document.getElementById('operator');
+        var selectedValue = selects.options[selects.selectedIndex].value;
+
+        calc.load(Number(input1));
+
+        if (selectedValue === 'add') {
+          calc.add(Number(input2));
+          document.getElementById('answerField').innerHTML = 'The answer is ' + calc.getTotal();
+        } else if (selectedValue === 'subtract') {
+          calc.subtract(Number(input2));
+          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
+        } else if (selectedValue === 'multiply') {
+          calc.multiply(Number(input2));
+          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
+        } else if (selectedValue === 'divide') {
+          calc.divide(Number(input2));
+          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
+        }
+
+      });*/
+    </script>
+  </body>
+</html>
