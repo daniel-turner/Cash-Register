@@ -1,50 +1,8 @@
 'use strict';
 
-console.log(calculatorModule);
+window.cashRegisterModule = {
 
-var cashRegisterModule = (function () {
-
-  var registerInterface = (function() {
-
-    //var displayValue = [];
-
-    // var _executeOperation = function(inDisplayValue, operationName) {
-
-      // var out = "Error!";
-
-      // switch (operationName) {
-
-      //   case "add":
-
-      //     out = calculatorModule.add(inDisplayValue);
-
-      //     break;
-      //   case "divide":
-
-      //     out = calculatorModule.divide(inDisplayValue);
-
-      //     break;
-      //   case "multiply":
-
-      //     out = calculatorModule.multiply(inDisplayValue);
-
-      //     break;
-
-      //   case "subtract":
-
-      //     out = calculatorModule.subtract(inDisplayValue);
-
-      //     break;
-
-      //   case "execute":
-
-
-      //     break;
-
-      //   };
-
-      //   _updateDisplay(out);
-    // };
+  registerInterface: (function() {
 
     var _clear = function() {
 
@@ -78,46 +36,58 @@ var cashRegisterModule = (function () {
 
     };
 
-  };);
+  })(),
 
-  var registerLogic = (function() {
+  registerLogic: (function() {
 
     var balance = 0;
 
-    var executeOperation = function(inputString) {
+    var _executeOperation = function(inputString) {
 
+      inputString = inputString.toString();
       var out = "Error! Could not process input.";
-
-      var index = -1;
+      var index;
       var left;
       var right;
 
-      if(inputString.indexOf("+") {
+
+
+      if(inputString.indexOf("+") > -1) {
 
         index = inputString.indexOf("+");
-        left = parseInt(inputString.slice(0,index),10);
-        right = parseInt(inputString.slice(index + 1),10);
+        left = parseFloat(inputString.slice(0,index));
+        right = parseFloat(inputString.slice(index + 1));
 
-        calculatorModule.load()
+        calculatorModule.load(left);
+        out = calculatorModule.add(right);
 
 
-      } else if (inputString.indexOf("-")) {
+      } else if (inputString.indexOf("-") > -1) {
 
-        index = inputString.indexOf("+");
-        left = parseInt(inputString.slice(0,index), 10);
-        right = parseInt(inputString.slice(index + 1), 10);
+        index = inputString.indexOf("-");
+        left = parseFloat(inputString.slice(0,index));
+        right = parseFloat(inputString.slice(index + 1));
 
-      } else if (inputString.indexOf("*")) {
+        calculatorModule.load(left);
+        out = calculatorModule.subtract(right);
 
-        index = inputString.indexOf("+");
-        left = parseInt(inputString.slice(0,index),10);
-        right = parseInt(inputString.slice(index + 1),10);
+      } else if (inputString.indexOf("*") > -1) {
 
-      } else if (inputString.indexOf("/")) {
+        index = inputString.indexOf("*");
+        left = parseFloat(inputString.slice(0,index));
+        right = parseFloat(inputString.slice(index + 1));
 
-        index = inputString.indexOf("+");
-        left = parseInt(inputString.slice(0,index),10);
-        right = parseInt(inputString.slice(index + 1),10);
+        calculatorModule.load(left);
+        out = calculatorModule.multiply(right);
+
+      } else if (inputString.indexOf("/") > -1) {
+
+        index = inputString.indexOf("/");
+        left = parseFloat(inputString.slice(0,index));
+        right = parseFloat(inputString.slice(index + 1));
+
+        calculatorModule.load(left);
+        out = calculatorModule.divide(right);
 
       };
 
@@ -126,24 +96,36 @@ var cashRegisterModule = (function () {
 
     var _getBalance = function() {
 
-      registerInterface.updateDisplay("Balance: " + balance);
+      return "Balance: " + balance;
     };
 
     var _deposit = function(number) {
 
+      number = _convertToNumber(number);
+
+      console.log(balance);
+      console.log(number);
+
       balance += number;
-      registerInterface.updateDisplay("New balance: " + balance);
+      return "New balance: " + balance;
     };
 
     var _withdraw = function(number) {
 
+      number = _convertToNumber(number);
+
       if(number > balance) {
 
-        registerInterface.updateDisplay("Insufficient funds!");
+        return "Insufficient funds!";
       };
 
       balance -= number;
-      registerInterface.updateDisplay("New balance: " + balance);
+      return "New balance: " + balance;
+    };
+
+    var _convertToNumber = function(string) {
+
+      return parseFloat(string);
     };
 
     return {
@@ -155,7 +137,7 @@ var cashRegisterModule = (function () {
 
     };
 
-  };);
+  })()
 
 
-})();
+};

@@ -58,14 +58,14 @@
         </table>
       </div>
     </div>
-    <script src="calculator.js" type="text/javascript"></script>
-    <script src="cash_register.js" type="text/javascript"></script>
+    <script src="js/calculator.js" type="text/javascript"></script>
+    <script src="js/cash_register.js" type="text/javascript"></script>
 
     <script>
 
       var resetOnNextInput = true;
 
-      var buttonDisplayInput = function(newValue) {
+      var buttonDisplay = function(newValue) {
 
         var oldValue = document.getElementById('displayField').innerHTML;
 
@@ -80,125 +80,157 @@
         }
       };
 
+      var buttonOperation = function(button) {
+
+        var out = "Unable to process operation.";
+        resetOnNextInput = true;
+
+        switch (button.innerHTML) {
+
+          case "Execute":
+
+            var string = document.getElementById('displayField').innerHTML;
+
+            if( typeof parseFloat(string) === "number"
+              && parseFloat(string) !== "NaN") {
+
+              return string;
+            };
+
+            out = cashRegisterModule.registerLogic.executeOperation(string);
+            break;
+
+          case "Balance":
+
+            out = cashRegisterModule.registerLogic.getBalance();
+            break;
+
+          case "Deposit":
+
+            out = cashRegisterModule.registerLogic.deposit(document.getElementById('displayField').innerHTML);
+            break;
+
+          case "Withdraw":
+
+            out = cashRegisterModule.registerLogic.withdraw(document.getElementById('displayField').innerHTML);
+            break;
+        };
+
+        if(typeof out === "number") {
+
+          resetOnNextInput = false;
+        };
+
+        document.getElementById('displayField').innerHTML = out;
+
+      };
+
       document.getElementById('buttonExecute').addEventListener('click', function(){
+
+        buttonOperation(this);
 
       });
       document.getElementById('button7').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button8').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button9').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonDivide').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonClear').addEventListener('click', function(){
 
+        resetOnNextInput = true;
+
+        document.getElementById('displayField').innerHTML = "0";
+
       });
       document.getElementById('button4').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button5').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button6').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonMultiply').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonBalance').addEventListener('click', function(){
 
+        buttonOperation(this);
+
       });
       document.getElementById('button1').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button2').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button3').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonSubtract').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonDeposit').addEventListener('click', function(){
 
+        buttonOperation(this);
+
       });
       document.getElementById('button0').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('button00').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonPoint').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonAdd').addEventListener('click', function(){
 
-        buttonDisplayInput(this.innerHTML);
+        buttonDisplay(this.innerHTML);
 
       });
       document.getElementById('buttonWithdraw').addEventListener('click', function(){
 
+        buttonOperation(this);
       });
-      /*document.getElementById('button').addEventListener('click', function() {
-        var input1 = document.getElementById('operand1').value;
-        var input2 = document.getElementById('operand2').value;
-
-        var selects = document.getElementById('operator');
-        var selectedValue = selects.options[selects.selectedIndex].value;
-
-        calc.load(Number(input1));
-
-        if (selectedValue === 'add') {
-          calc.add(Number(input2));
-          document.getElementById('answerField').innerHTML = 'The answer is ' + calc.getTotal();
-        } else if (selectedValue === 'subtract') {
-          calc.subtract(Number(input2));
-          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
-        } else if (selectedValue === 'multiply') {
-          calc.multiply(Number(input2));
-          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
-        } else if (selectedValue === 'divide') {
-          calc.divide(Number(input2));
-          document.getElementById('answerField').innerHTML = 'The answer is ' +calc.getTotal()
-        }
-
-      });*/
     </script>
   </body>
 </html>
